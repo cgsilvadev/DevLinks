@@ -1,0 +1,269 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+}
+
+/* Variáveis CSS modo default */
+:root {
+    --text-color: #fff;
+    --bg-url: url(./assets/bg-mobile.jpg);
+    --stroke-color: rgba(255, 255, 255, 0.5);
+    --surface-color: rgba(255, 255, 255, 0.05);
+    --surface-color-hover: rgba(255, 255, 255, 0.02);
+    --highlight-color: rgba(255, 255, 255, 0.2);
+    --switch-bg-url: url(./assets/moon-stars.svg)
+}
+
+/* Variáveis CSS modo light */
+.light {
+    --text-color: #000;
+    --bg-url: url(./assets/bg-mobile-light.jpg);
+    --stroke-color: rgba(0, 0, 0, 0.5);
+    --surface-color: rgba(0, 0, 0, 0.05);
+    --surface-color-hover: rgba(0, 0, 0, 0.02);
+    --highlight-color: rgba(0, 0, 0, 0.1);
+    --switch-bg-url: url(./assets/sun.svg)
+}
+
+body {
+    /*
+    background-image: url(assets/bg-mobile.jpg);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover; 
+    */
+    
+                /*  Shorthand */
+    /*
+     background: color image repeat position/size 
+    */
+    background: var(--bg-url) no-repeat top center/cover;
+}
+/* Definição da fonte e cor do texto. */
+body * {
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+}
+
+#container {
+    /*
+     O elemento se ajusta ao tamanho do dispositivo até a largura de 588px.
+    */
+    width: 100%;
+    max-width: 588px;
+    margin: 56px auto 0;
+    padding: 0 24px;
+}
+
+/* Profile */
+#profile {
+    /*
+     Para centralizar um elemento inline utiliza-se 'text-align: center;' no elemento pai.
+    */
+    text-align: center; 
+    padding: 24PX;
+}
+
+#profile img {
+    width: 112px;
+    /*    
+    display: block; Propriedade necessária para usar 'margin: auto' para centralizar o elemento inline.
+    
+    'margin: auto;' Não funciona em elementos inline sem a propriedade display: block.
+    */
+}
+
+#profile p {
+    font-weight: 500;
+    line-height: 24px;
+    margin-top: 8px;
+}
+
+/* Switch */
+
+#switch {
+    /*
+     Aplica-se 'position: relative' no elemento para que seja possível posicionar elementos filhos definidos com 'position: absolute'.  
+    */
+    position: relative;
+    width: 64px;
+
+    margin: 4px auto;
+
+    cursor: pointer;
+}
+
+#switch button {
+    /*
+     'Position: absolute' cria uma nova camada na página permitindo que o elemento sobreponha e mova-se em qualquer lugar da página. 
+    */
+    position: absolute;
+    /*
+     O elemento sobrepõe outros elementos definidos como 'z-index' com valores menores. 
+    */
+    z-index: 1;
+    left: 0;
+    /*
+     Move o elemento verticalmente em direção ao rodapé da página. 
+    */
+    top: 50%; 
+
+    width: 32px;
+    height: 32px;
+    background: white var(--switch-bg-url) no-repeat center;
+    border: 0;
+    border-radius: 50%;
+    
+    /*
+     Move o elemento 50% verticalmente em direção ao topo do elemento pai. 
+    */
+    transform: translateY(-50%);
+
+    /*
+     Cria uma animação que faz o botão deslizar 50% horizontalmente da direita para a esqueda. 
+    */
+    animation: slide-back 0.4s;
+}
+
+#switch button:hover {
+    cursor: pointer;
+    outline: 8px solid var(--highlight-color);
+}
+
+.light #switch button {
+    /* 
+    right: 0;
+    
+     Mesmo após definir right: 0, o valor anterior left: 0 ainda está ativo, porque position: absolute permite que left e right coexistam — e o navegador precisa decidir qual prevalece. Ao adicionar left: initial,  você reseta o valor de left para seu estado padrão (que é auto), permitindo que right: 0 funcione corretamente sem conflito.
+    
+    left: initial;
+
+        As declarações acima foram desativadas para uso da animação. 
+    */
+
+    /*
+     Cria uma animação que chamada slide-in que faz o botão deslizar suavemente da esquerda para direita durante 0.4s. Forwards faz o botão permanecer na direita ao término da animação, impedindo que o botão retorne a posição inicial, ou seja, volte para a esquerda. 
+    */
+    animation: slide-in 0.4s forwards;
+}
+
+/*
+ Cria o elemento por onde se move o botão. 
+*/
+#switch span {
+    display: block;
+
+    width: 64px;
+    height: 24px;
+    
+    background: var(--surface-color);
+    border: 1px solid var(--stroke-color);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 9999px;
+}
+
+/* Links */
+ul {
+    list-style: none;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding: 24px 0;
+}
+
+ul li a {
+    background: var(--surface-color);
+    border: 1px solid var(--stroke-color);
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 16px 24px;
+
+    text-decoration: none;
+    font-weight: 500;
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    transition: background .5s;
+}
+
+/* Pseudo-classe */
+ul li a:hover {
+    border: 1.5px solid var(--text-color);
+    background: var(--surface-color-hover);
+}
+
+/* Social links */
+#social-links {
+    display: flex;
+    justify-content: center;
+
+    padding: 24px 0;
+
+    font-size: 24px;
+}
+
+#social-links a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    padding: 16px;
+
+    transition: background .2s;
+    border-radius: 50%;
+}
+
+#social-links a:hover {
+    background: var(--highlight-color);
+}
+
+/* Rodapé */
+footer {
+    padding: 24px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+/*             Media Queries
+ Quando a página tiver 700px de largura ou mais a imagem de fundo definida na variável --bg-url será carregada. 
+*/
+@media (min-width: 700px) {
+    :root {
+        --bg-url: url(./assets/bg-desktop.jpg);
+    }
+
+    .light {
+        --bg-url: url(./assets/bg-desktop-light.png);
+    }
+}
+
+/* Animation */
+@keyframes slide-in {
+    from {
+        /* Posição inicial da animação. */
+        left: 0; 
+    }
+    to{
+        /* Posição final da animação. */
+        left: 50%; 
+    }
+}
+
+@keyframes slide-back {
+    from {
+        left: 50%;
+    }
+    to {
+        left: 0;
+    }
+}
